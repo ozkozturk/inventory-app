@@ -1,34 +1,20 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
+import StyledTable from './styled';
+import UpdateBook from '../UpdateBook';
+import { BookTypes } from './types';
 
 const AppTable = () => {
-  const columns: any = [
+  const columns: object[] = [
     {
       title: 'Book Name',
       dataIndex: 'bookName',
-      filters: [
-        {
-          text: 'Harry Potter',
-          value: 'Harry Potter',
-        },
-        {
-          text: 'Foundation',
-          value: 'Foundation',
-        },
-        {
-          text: 'I, Robot',
-          value: 'I, Robot',
-        },
-        {
-          text: 'Brave New World',
-          value: 'Brave New World',
-        },
-      ],
       // specify the condition of filtering result
       // here is that finding the name started with `value`
       onFilter: (value: any, record: any) => record.bookName.indexOf(value) === 0,
       sorter: (a: any, b: any) => a.bookName.length - b.bookName.length,
       sortDirections: ['descend'],
+      render: (text: string) => <Button type="link">{text}</Button>,
     },
     {
       title: 'Author',
@@ -61,18 +47,18 @@ const AppTable = () => {
     {
       title: 'Update',
       dataIndex: 'update',
-      render: () => <a href="/">Update</a>,
+      // render: () => data.map((book, index) => <UpdateBook {...book} index={index} />),
+      render: (text: any, record: BookTypes) => <UpdateBook book={record} />,
     },
   ];
 
-  const data = [
+  const data: BookTypes[] = [
     {
       key: '1',
       bookName: 'Harry Potter',
       author: 'J.K. Rowling',
       price: 10,
       isbn: 'ISBN 1111111',
-      update: true,
     },
     {
       key: '2',
@@ -80,7 +66,6 @@ const AppTable = () => {
       author: 'Isaac Asimov',
       price: 12,
       isbn: 'ISBN 22222222',
-      update: true,
     },
     {
       key: '3',
@@ -88,7 +73,6 @@ const AppTable = () => {
       author: 'Isaac Asimov',
       price: 11,
       isbn: 'ISBN 333333333',
-      update: true,
     },
     {
       key: '4',
@@ -96,11 +80,13 @@ const AppTable = () => {
       author: 'Aldous Huxley',
       price: 13,
       isbn: 'ISBN 4444444444',
-      update: true,
     },
   ];
+
   return (
-    <Table columns={columns} dataSource={data} />
+    <StyledTable>
+      <Table columns={columns} dataSource={data} />
+    </StyledTable>
   );
 };
 
