@@ -26,7 +26,7 @@ export const getItem = () => (dispatch: Dispatch) => {
   return api.get('/').then((response) => {
     dispatch({
       type: GET_BOOK_SUCCESS,
-      payload: response.data
+      payload: response.data,
     });
   }).catch((error) => {
     dispatch({
@@ -40,7 +40,7 @@ export const getItem = () => (dispatch: Dispatch) => {
   });
 };
 
-export const addBook = (bookName:string, author: string, price: number) => (dispatch: Dispatch) => {
+export const addBook = (bookName: string, author: string, price: any) => (dispatch: Dispatch) => {
   dispatch({
     type: ADD_BOOK_PENDING,
   });
@@ -61,11 +61,11 @@ export const addBook = (bookName:string, author: string, price: number) => (disp
   });
 };
 
-export const updateBook = (id: number, bookName: string, author: string, price: number) => (dispatch: Dispatch) => {
+export const updateBook = (id: number, bookName: string, author: string, price: string) => (dispatch: Dispatch) => {
   dispatch({
     type: UPDATE_BOOK_PENDING,
   });
-  return api.post('/update', { bookName, author, price}).then((response) => {
+  return api.post('/update', { bookName, author, price }).then((response) => {
     dispatch({
       type: UPDATE_BOOK_SUCCESS,
       payload: response.data,
