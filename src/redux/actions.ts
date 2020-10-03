@@ -19,7 +19,7 @@ import {
   UPDATE_BOOK_FULFILL,
 } from './actionTypes';
 
-export const getItem = () => (dispatch: Dispatch) => {
+export const getBook = () => (dispatch: Dispatch) => {
   dispatch({
     type: GET_BOOK_PENDING,
   });
