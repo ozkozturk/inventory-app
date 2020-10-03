@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, Button } from 'antd';
+import {
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import StyledTable from './styled';
 import UpdateBook from '../UpdateBook';
 import { BookTypes } from './types';
+import AddBook from '../AddBook';
+import {
+  InitialStateTypes,
+  TableDataTypes,
+} from '../../redux/initialState';
+import { getBook } from '../../redux/actions';
 
 const AppTable = () => {
+  const books = useSelector(((state: InitialStateTypes) => state.books));
+  const dispatch = useDispatch();
+  const booksData = books.data.map((book: TableDataTypes) => book);
+
+  useEffect(() => {
+    dispatch(getBook());
+  }, [dispatch]);
   const columns: object[] = [
     {
       title: 'Book Name',
@@ -52,40 +69,10 @@ const AppTable = () => {
     },
   ];
 
-  const data: BookTypes[] = [
-    {
-      key: '1',
-      bookName: 'Harry Potter',
-      author: 'J.K. Rowling',
-      price: 10,
-      isbn: 'ISBN 1111111',
-    },
-    {
-      key: '2',
-      bookName: 'Foundation',
-      author: 'Isaac Asimov',
-      price: 12,
-      isbn: 'ISBN 22222222',
-    },
-    {
-      key: '3',
-      bookName: 'I, Robot',
-      author: 'Isaac Asimov',
-      price: 11,
-      isbn: 'ISBN 333333333',
-    },
-    {
-      key: '4',
-      bookName: 'Brave New World',
-      author: 'Aldous Huxley',
-      price: 13,
-      isbn: 'ISBN 4444444444',
-    },
-  ];
-
   return (
     <StyledTable>
-      <Table columns={columns} dataSource={data} />
+      <AddBook />
+      <Table columns={columns} dataSource={booksData} />
     </StyledTable>
   );
 };
