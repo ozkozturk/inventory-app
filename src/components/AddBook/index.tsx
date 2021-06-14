@@ -45,7 +45,7 @@ const AddBook: FC = () => {
     <StyledForm>
       <Form
         form={form}
-        layout="inline"
+        layout="horizontal"
         {...formItemLayout}
       >
         <Form.Item label="Book Name">

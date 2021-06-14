@@ -65,7 +65,7 @@ export const updateBook = (id: number, bookName: string, author: string, price: 
   dispatch({
     type: UPDATE_BOOK_PENDING,
   });
-  return api.post('/update', { bookName, author, price }).then((response) => {
+  return api.post('/update', { id, bookName, author, price }).then((response) => {
     dispatch({
       type: UPDATE_BOOK_SUCCESS,
       payload: response.data,

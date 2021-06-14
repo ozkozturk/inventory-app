@@ -41,7 +41,7 @@ const bookReducer = (state = initialState.books, action: ActionTypes) => {
     case ADD_BOOK_FAILURE:
     case UPDATE_BOOK_FAILURE:
     case DELETE_BOOK_FAILURE:
-      return { ...state, status: 'failure' };
+      return { ...state, error: { ...action.error }, status: 'failure' };
     case GET_BOOK_FULFILL:
     case ADD_BOOK_FULFILL:
     case UPDATE_BOOK_FULFILL:
